@@ -1,0 +1,40 @@
+h1{
+    font-family: "Lilita One", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+        font-size: 128px;
+        color: ;
+      
+}
+h2{
+        font-family: "Acme", sans-serif;
+        font-weight: 400;
+        font-style: normal;
+      font-size: 64px;
+}
+.row3{
+    margin-top: 160px;
+}
+.btn{
+    font-family: "Acme", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+  font-size: 48px;
+  height: 110px;
+}
+#btna{
+    text-align: left;
+}
+#btnb{
+    text-align: left;
+}
+#btnc{
+    text-align: left;
+}
+#btnd{
+    text-align: left;
+}
+#btns{
+    height: 470px;
+    width: 470px;
+}
