@@ -52,7 +52,7 @@ h2{
     color: white;
     
 }
-#btns{
+#next-btn{
     height: 470px;
     width: 470px;
     background-color: #932ED1;
@@ -62,10 +62,10 @@ h2{
 .btn:hover {
     color: var(--bs-btn-hover-color);
     background-color: var(--bs-btn-hover-bg);
-    border-color: #fff;
+    border-color: #ff9409;
 }
 .btn-check:checked+.btn, .btn.active, .btn.show, .btn:first-child:active, :not(.btn-check)+.btn:active {
     color: var(--bs-btn-active-color);
     background-color: var(--bs-btn-active-bg);
-    border-color: white;
+    border-color: #ff9409;
 }
