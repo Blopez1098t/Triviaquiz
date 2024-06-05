@@ -52,11 +52,12 @@ h2{
     color: white;
     
 }
-#next-btn{
+#submit-btn{
     height: 470px;
     width: 470px;
     background-color: #932ED1;
     color: white;
+    display: none;
     
 }
 .btn:hover {
