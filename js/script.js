@@ -1,11 +1,12 @@
+
 const questions = [
     {
         question: "Who is considered the Father of Relativity?",
         answers: [
             { text: "Issac Newton", correct: false},
-            { text: "Albert Einstien", correct: true},
+            { text: "Albert Einstein", correct: true},
             { text: "Mogilski", correct: false},
-            { text: "Shawn Mendez", correct: false},
+            { text: "Shawn Mendes", correct: false},
         ]
     },
     {
@@ -40,21 +41,21 @@ const questions = [
         answers: [
             { text: "North American Satellite Association", correct: false},
             { text: "National American Space Association", correct: false},
+            { text: "National Aeronautics and Space Administration", correct: true},
             { text: "National Association of Space Astronauts", correct: false},
-            { text: "North American Satellite Association", correct: true},
         ]
     },
     {
-        question: "What is the capital city of Canada??",
+        question: "What is the capital city of Canada?",
         answers: [
             { text: "Vancouver", correct: false},
             { text: "Toronto", correct: false},
             { text: "Quebec City", correct: false},
-            { text: "Ottawa ", correct: true},
+            { text: "Ottawa", correct: true},
         ]
     },
     {
-        question: "What is the strongest muscle in the human body",
+        question: "What is the strongest muscle in the human body?",
         answers: [
             { text: "Tongue", correct: false},
             { text: "Quadriceps", correct: false},
@@ -98,33 +99,81 @@ const nextButton = document.getElementById('submit-btn');
 let currentQuestionIndex = 0;
 let score = 0;
 
-function startQuiz(){
+function startQuiz() {
     currentQuestionIndex = 0;
     score = 0;
     nextButton.innerHTML = "Next";
     showQuestions();
 }
 
-function showQuestions(){
+function showQuestions() {
     resetState();
     let currentQuestion = questions[currentQuestionIndex];
     let questionNo = currentQuestionIndex + 1;
-    questionElement.innerHTML = questionNo + ". " + currentQuestion.
-    question;
+    questionElement.innerHTML = questionNo + ". " + currentQuestion.question;
 
-    currentQuestion.answers.forEach(answer => {
+    currentQuestion.answers.forEach((answer, index) => {
         const button = document.createElement('button');
-        button.innerHTML = answer.text;
+        button.textContent = answer.text;
         button.classList.add('btn');
         answerButtons.appendChild(button);
+        if (answer.correct) {
+            button.dataset.correct = answer.correct;
+        }
+        // Assign IDs btna, btnb, btnc, btnd dynamically
+        button.id = 'btn' + String.fromCharCode(97 + index);
+        button.addEventListener("click", selectAnswer);
     });
 }
 
-function resetState(){
+function resetState() {
     nextButton.style.display = "none";
-    while(answerButtons.firstChild){
+    while (answerButtons.firstChild) {
         answerButtons.removeChild(answerButtons.firstChild);
     }
 }
 
+function selectAnswer(e) {
+    const selectedBtn = e.target;
+    const isCorrect = selectedBtn.dataset.correct === "true";
+    if (isCorrect) {
+        selectedBtn.classList.add("correct");
+        score++;
+    } else {
+        selectedBtn.classList.add("incorrect");
+    }
+    Array.from(answerButtons.children).forEach(button => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+        }
+        button.disabled = true;
+    });
+    nextButton.style.display = "block";
+}
+
+function showScore() {
+    resetState();
+    questionElement.innerHTML = `You scored ${score} out of ${questions.length}!`;
+    nextButton.innerHTML = "Play Again";
+    nextButton.style.display = "block";
+}
+
+function handleNextButton() {
+    currentQuestionIndex++;
+    if (currentQuestionIndex < questions.length) {
+        showQuestions();
+    } else {
+        showScore();
+    }
+}
+
+nextButton.addEventListener("click", () => {
+    if (currentQuestionIndex < questions.length) {
+        handleNextButton();
+    } else {
+        startQuiz();
+    }
+});
+
 startQuiz();
+
